@@ -1,0 +1,642 @@
+#rearchinput {
+  width: 30rem;
+  padding: 0rem 1rem;
+  border: none;
+  /* box-shadow: 1px 1px 1px 1px 12px blue; */
+  box-shadow: 1px 1px 12px #dddde4;
+}
+
+body {
+  background-image: url("./img/invicebg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+#loading {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+  top: 0;
+  left: 0;
+}
+
+.lenccontainer2 {
+  display: flex;
+  position: relative;
+  width: 100%;
+  justify-content: space-between;
+}
+
+#lencemd {
+  width: 10rem;
+}
+
+#lenceqt {
+  width: 4rem;
+}
+
+#lenceprice {
+  width: 6rem;
+}
+
+
+
+
+
+
+.lencerelative {
+  position: relative;
+}
+
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.homeaddsection {
+  text-align: right;
+  width: 90%;
+}
+
+.homecontainer {
+  width: 90%;
+  margin: auto;
+}
+
+.homedata {
+  overflow: auto;
+}
+
+.btn a {
+  text-decoration: none;
+  color: white;
+}
+
+.registercontainer {
+  width: 90%;
+  margin: auto;
+}
+
+
+
+/* view */
+
+.viewbox h3 {
+  margin: 1rem;
+}
+
+.viewcontainer {
+  width: 90%;
+  margin: 1rem auto;
+}
+
+.viewimg {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100px;
+  overflow: hidden;
+
+
+}
+
+.viewimg img {
+  width: 100%;
+  height: 100%;
+
+
+}
+
+.viewimgbutton {
+  display: flex;
+  /* justify-content: space-between; */
+}
+
+.viewbutton {
+  margin-left: 7rem;
+}
+
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+  /* font-family: sans-serif; */
+}
+
+/* body {
+  /* background-color: #f7f7f7; */
+/* background-color: aqua; */
+/* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+/* scroll-behavior: smooth; */
+/* } */
+
+/* .head {
+  display: flex;
+  justify-content: space-between;
+  background: #4d8ff3;
+  color: white;
+  padding: 20px 20px 20px;
+} */
+.head {
+  padding-top: 20px;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+hr {
+  width: 200px;
+}
+
+
+.opt-form {
+  -webkit-box-shadow: 0 28px 16px -26px rgba(0, 0, 0);
+  -moz-box-shadow: 0 28px 16px -26px rgba(0, 0, 0);
+  box-shadow: 0 20px 80px 1px rgb(231, 230, 230);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+sup {
+  color: rgb(255, 0, 0);
+  font-size: 12px;
+  font-weight: 400px;
+}
+
+.roshni-lab label {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.roshni-lab {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.checkboxes {
+  display: flex;
+  /* justify-content: center; */
+  gap: 50px;
+  flex-wrap: wrap;
+  padding-left: 20px;
+}
+
+.checkbox label {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+
+
+
+/* alluer data  */
+
+.userdata {
+  width: 80%;
+
+  margin: 2rem auto;
+}
+
+
+/* invice css */
+.invicecontainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.invicebox {
+  box-shadow: 1px 1px 12px 1px rgb(218, 218, 221);
+  width: 100%;
+  /* overflow: auto; */
+  margin: auto;
+  position: relative;
+  padding: 1rem;
+
+}
+
+.invicehead {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+p {
+  color: #666;
+  font-size: 16px;
+}
+
+
+.inviceheadleft h4 {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.inviceheadleft h4 span {
+  font-size: 1rem;
+  font-weight: 100;
+}
+
+.invicehead .inviceheadleft {
+  width: 70%;
+  position: relative;
+}
+
+.invicehead .inviceheadright {
+  width: 28%;
+  position: relative;
+}
+
+.invicehead .inviceheadright img {
+  width: 100%;
+}
+
+.invicehead {
+  margin: 1rem 0rem;
+}
+
+
+/* local invice */
+
+.amountboxs {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+
+
+
+.head {
+  padding-top: 20px;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+hr {
+  width: 200px;
+}
+
+.opt-form {
+  -webkit-box-shadow: 0 28px 16px -26px rgba(0, 0, 0);
+  -moz-box-shadow: 0 28px 16px -26px rgba(0, 0, 0);
+  box-shadow: 0 20px 80px 1px rgb(231, 230, 230);
+  border-radius: 15px;
+}
+
+.cusdfrm {
+  font-family: monospace;
+  font-weight: 700;
+}
+
+sup {
+  color: rgb(255, 0, 0);
+  font-size: 12px;
+  font-weight: 400px;
+}
+
+.roshni-lab label {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.roshni-lab {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.checkboxes {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  padding-left: 20px;
+}
+
+.checkbox label {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.dr-row {
+  background-color: #F6D7A7
+}
+
+
+#frameinput input {
+  width: 11rem;
+  padding: 0.3rem;
+  border-radius: 2px;
+  border: none;
+  outline: none;
+}
+
+
+
+.container {
+  width: 100%;
+  /* max-width: 800px; */
+  margin: 0 auto;
+  /* padding: 20px; */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10px;
+}
+
+/* .logo {
+    max-width: 150px;
+    height: auto;
+  } */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+th,
+td {
+  border: 1px solid black;
+  /* padding: 8px; */
+}
+
+th {
+  /* background-color: #f2f2f2; */
+}
+
+.stamp {
+  position: absolute;
+  bottom: 40px;
+  right: 20px;
+  /* mix-blend-mode: difference; */
+}
+
+.ak-imge p {
+  position: absolute;
+  bottom: 10px;
+  right: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 600;
+}
+
+.main-container {
+  background: #f5f7f8;
+  background-image: url("./img//invicebg.jpg");
+  position: center;
+  object-fit: cover;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+}
+
+.lgo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  mix-blend-mode: multiply;
+  background-color: aqua;
+}
+
+h2 {
+  text-align: center;
+}
+
+.btm {
+  position: absolute;
+  bottom: 15px;
+  left: 400px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.opt {
+  font-size: 22px;
+}
+
+.ttl {
+  text-align: right;
+}
+
+
+
+
+/* invicenew */
+
+
+p {
+  color: #666;
+  font-size: 16px;
+}
+
+.cusdfrm {
+  font-family: monospace;
+  font-weight: 700;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.bill-invoice {
+  position: relative;
+  background: #f5f7f8;
+  background-image: url("./img/invicebg.jpg");
+  position: center;
+  object-fit: cover;
+  font-family: Arial, Helvetica, sans-serif;
+  /* padding: 20px; */
+  height: 100vh;
+}
+
+.background-text {
+  position: absolute;
+  top: 30%;
+  left: 60%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  pointer-events: none;
+  
+}
+
+.background-text h1 {
+  font-size: 60px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.1);
+}
+
+.lgo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  mix-blend-mode: multiply;
+  background-color: #fff;
+  /* background-color: rgb(36, 187, 187); */
+}
+
+.lgo img {
+  width: 320px;
+  height: 120px;
+  /* padding: 10px; */
+}
+
+.both {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.both p{
+  line-height: 0.5;
+}
+
+.ttl {
+  text-align: right;
+}
+
+.rsni-opt {
+  font-weight: 700;
+  padding-top: 5px;
+}
+
+.btm-logo img {
+  width: 140px;
+  height: 80px;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 0px;
+}
+
+.ophthalmologist-text {
+  margin-left: 10px;
+}
+
+.ctr {
+  text-align: center;
+}
+
+.row>*{
+  padding-left: 0;
+}
+
+
+
+
+/* send massage */
+
+.formcontainer {
+  width: 100%;
+  margin: 3rem auto;
+}
+
+.b1 {
+  border: 1px solid black;
+}
+
+.whatsappModelContainer {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  background-color: #CBEFFF;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.show {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgb(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+}
+
+
+/* .whatsappbox {
+  z-index: 12;
+  background-color: black;
+  box-shadow: 1px 1px 12px 1px rgb(243, 243, 248);
+} */
+
+
+
+/* birthdaybox  */
+
+.birthdaybox{
+  box-shadow: 1px 1px 12px 1px rgb(167 167 215);
+  width: 47%;
+  padding: 0.5rem 1rem;
+  margin: 1rem;
+}
+
+.birthdaybox h3{
+  margin: 0;
+}
+.birthdaybox h6{
+  margin: 0;
+}
+.birthdayblock{
+  display: flex;
+}
+.confirmation-dialog {
+  position: fixed;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  /* Add other styles as needed */
+}
+
+.marginbutton{
+  margin: 0rem 1rem;
+}
+
+
+
+/* datefilter */
+
+.dateFilter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/* homeaddsection d-flex justify-content-between */
