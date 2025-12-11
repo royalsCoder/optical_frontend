@@ -11,10 +11,7 @@ import {
   Select,
   Tag,
   Input,
-  Space,
-  Popover,
-  DatePicker as AntDatePicker,
-  ConfigProvider
+  Space
 } from "antd";
 import {
   DownloadOutlined,
@@ -46,19 +43,11 @@ const MonthlyIncome = () => {
     averageAdvance: 0
   });
   
-  // Simple string format for dates
+  // Store dates as strings in DD/MM/YYYY format
   const [startDate, setStartDate] = useState(
-    moment().startOf('month').format('YYYY-MM-DD')
-  );
-  const [endDate, setEndDate] = useState(
-    moment().endOf('month').format('YYYY-MM-DD')
-  );
-  
-  // For display in DD/MM/YYYY format
-  const [displayStartDate, setDisplayStartDate] = useState(
     moment().startOf('month').format('DD/MM/YYYY')
   );
-  const [displayEndDate, setDisplayEndDate] = useState(
+  const [endDate, setEndDate] = useState(
     moment().endOf('month').format('DD/MM/YYYY')
   );
   
@@ -101,19 +90,46 @@ const MonthlyIncome = () => {
     return result;
   }, [data, filters.sortBy]);
 
+  // Validate and convert date format
+  const validateAndConvertDate = (dateStr) => {
+    if (!dateStr) return null;
+    
+    // Try parsing as DD/MM/YYYY
+    const date = moment(dateStr, 'DD/MM/YYYY', true);
+    if (date.isValid()) {
+      return date.format('YYYY-MM-DD');
+    }
+    
+    // Try parsing as other formats
+    const altDate = moment(dateStr);
+    if (altDate.isValid()) {
+      return altDate.format('YYYY-MM-DD');
+    }
+    
+    return null;
+  };
+
   const fetchData = async () => {
     try {
-      if (!startDate || !endDate) {
-        message.warning('Please select a date range');
+      const formattedStartDate = validateAndConvertDate(startDate);
+      const formattedEndDate = validateAndConvertDate(endDate);
+      
+      if (!formattedStartDate || !formattedEndDate) {
+        message.error('Invalid date format. Please use DD/MM/YYYY format');
+        return;
+      }
+      
+      if (moment(formattedEndDate).isBefore(formattedStartDate)) {
+        message.error('End date cannot be before start date');
         return;
       }
 
       setLoading(true);
       
-      console.log('Fetching data for:', startDate, 'to', endDate);
+      console.log('Fetching data for:', formattedStartDate, 'to', formattedEndDate);
       
       const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/custom?startDate=${startDate}&endDate=${endDate}`,
+        `${process.env.REACT_APP_BASE_URL}/custom?startDate=${formattedStartDate}&endDate=${formattedEndDate}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -157,54 +173,12 @@ const MonthlyIncome = () => {
 
   const handleStartDateChange = (e) => {
     const value = e.target.value;
-    setDisplayStartDate(value);
-    
-    // Parse DD/MM/YYYY to YYYY-MM-DD
-    const parts = value.split('/');
-    if (parts.length === 3) {
-      const day = parts[0];
-      const month = parts[1];
-      const year = parts[2];
-      
-      if (day && month && year && day.length === 2 && month.length === 2 && year.length === 4) {
-        const dateStr = `${year}-${month}-${day}`;
-        const date = moment(dateStr, 'YYYY-MM-DD');
-        if (date.isValid()) {
-          setStartDate(dateStr);
-          message.info('Start date updated. Click "Apply" to fetch data.');
-          return;
-        }
-      }
-    }
-    
-    // If invalid, don't update the actual date
-    message.error('Invalid date format. Use DD/MM/YYYY');
+    setStartDate(value);
   };
 
   const handleEndDateChange = (e) => {
     const value = e.target.value;
-    setDisplayEndDate(value);
-    
-    // Parse DD/MM/YYYY to YYYY-MM-DD
-    const parts = value.split('/');
-    if (parts.length === 3) {
-      const day = parts[0];
-      const month = parts[1];
-      const year = parts[2];
-      
-      if (day && month && year && day.length === 2 && month.length === 2 && year.length === 4) {
-        const dateStr = `${year}-${month}-${day}`;
-        const date = moment(dateStr, 'YYYY-MM-DD');
-        if (date.isValid()) {
-          setEndDate(dateStr);
-          message.info('End date updated. Click "Apply" to fetch data.');
-          return;
-        }
-      }
-    }
-    
-    // If invalid, don't update the actual date
-    message.error('Invalid date format. Use DD/MM/YYYY');
+    setEndDate(value);
   };
 
   const downloadExcel = () => {
@@ -245,7 +219,7 @@ const MonthlyIncome = () => {
       const summaryData = [
         ['Summary Report'],
         [''],
-        ['Date Range', `${displayStartDate} to ${displayEndDate}`],
+        ['Date Range', `${startDate} to ${endDate}`],
         ['Total Records', summary.totalRecords],
         ['Total Income', `₹${summary.income.toLocaleString()}`],
         ['Average Advance', `₹${summary.averageAdvance.toFixed(2)}`],
@@ -271,15 +245,8 @@ const MonthlyIncome = () => {
   };
 
   const resetFilters = () => {
-    const start = moment().startOf('month').format('YYYY-MM-DD');
-    const end = moment().endOf('month').format('YYYY-MM-DD');
-    const displayStart = moment().startOf('month').format('DD/MM/YYYY');
-    const displayEnd = moment().endOf('month').format('DD/MM/YYYY');
-    
-    setStartDate(start);
-    setEndDate(end);
-    setDisplayStartDate(displayStart);
-    setDisplayEndDate(displayEnd);
+    setStartDate(moment().startOf('month').format('DD/MM/YYYY'));
+    setEndDate(moment().endOf('month').format('DD/MM/YYYY'));
     
     setFilters({
       sortBy: 'date_desc',
@@ -289,13 +256,58 @@ const MonthlyIncome = () => {
     fetchData();
   };
 
-  // Quick date setter functions
-  const setDateRange = (start, end) => {
-    setStartDate(start.format('YYYY-MM-DD'));
-    setEndDate(end.format('YYYY-MM-DD'));
-    setDisplayStartDate(start.format('DD/MM/YYYY'));
-    setDisplayEndDate(end.format('DD/MM/YYYY'));
-    message.info('Date range updated. Click "Apply" to fetch data.');
+  // Set quick date ranges
+  const setQuickDateRange = (type) => {
+    let start, end;
+    
+    switch(type) {
+      case 'today':
+        start = moment();
+        end = moment();
+        break;
+      case 'yesterday':
+        start = moment().subtract(1, 'day');
+        end = moment().subtract(1, 'day');
+        break;
+      case 'thisWeek':
+        start = moment().startOf('week');
+        end = moment().endOf('week');
+        break;
+      case 'lastWeek':
+        start = moment().subtract(1, 'week').startOf('week');
+        end = moment().subtract(1, 'week').endOf('week');
+        break;
+      case 'thisMonth':
+        start = moment().startOf('month');
+        end = moment().endOf('month');
+        break;
+      case 'lastMonth':
+        start = moment().subtract(1, 'month').startOf('month');
+        end = moment().subtract(1, 'month').endOf('month');
+        break;
+      case 'thisYear':
+        start = moment().startOf('year');
+        end = moment().endOf('year');
+        break;
+      case 'lastYear':
+        start = moment().subtract(1, 'year').startOf('year');
+        end = moment().subtract(1, 'year').endOf('year');
+        break;
+      case 'last7Days':
+        end = moment();
+        start = moment().subtract(6, 'days');
+        break;
+      case 'last30Days':
+        end = moment();
+        start = moment().subtract(29, 'days');
+        break;
+      default:
+        return;
+    }
+    
+    setStartDate(start.format('DD/MM/YYYY'));
+    setEndDate(end.format('DD/MM/YYYY'));
+    message.info(`Date range set to ${start.format('DD/MM/YYYY')} - ${end.format('DD/MM/YYYY')}. Click "Apply" to fetch data.`);
   };
 
   // Initial load
@@ -427,7 +439,7 @@ const MonthlyIncome = () => {
             />
             <div className="card-footer">
               <span>
-                {displayStartDate} - {displayEndDate}
+                {startDate} - {endDate}
               </span>
             </div>
           </Card>
@@ -468,26 +480,28 @@ const MonthlyIncome = () => {
         <Row gutter={[16, 16]} align="middle">
           <Col xs={24} md={12} lg={6}>
             <div className="filter-item">
-              <label className="filter-label">From Date (DD/MM/YYYY)</label>
+              <label className="filter-label">From Date</label>
               <Input
-                value={displayStartDate}
+                value={startDate}
                 onChange={handleStartDateChange}
                 placeholder="DD/MM/YYYY"
                 suffix={<CalendarOutlined />}
                 style={{ width: '100%' }}
+                addonBefore={<span style={{ fontSize: '12px' }}>DD/MM/YYYY</span>}
               />
             </div>
           </Col>
           
           <Col xs={24} md={12} lg={6}>
             <div className="filter-item">
-              <label className="filter-label">To Date (DD/MM/YYYY)</label>
+              <label className="filter-label">To Date</label>
               <Input
-                value={displayEndDate}
+                value={endDate}
                 onChange={handleEndDateChange}
                 placeholder="DD/MM/YYYY"
                 suffix={<CalendarOutlined />}
                 style={{ width: '100%' }}
+                addonBefore={<span style={{ fontSize: '12px' }}>DD/MM/YYYY</span>}
               />
             </div>
           </Col>
@@ -566,86 +580,30 @@ const MonthlyIncome = () => {
         </Row>
         
         {/* Quick Date Buttons */}
-        <Row gutter={[8, 8]} style={{ marginTop: 16 }}>
-          <Col xs={12} sm={6} lg={3}>
-            <Button
-              size="small"
-              onClick={() => {
-                const start = moment().startOf('month');
-                const end = moment().endOf('month');
-                setDateRange(start, end);
-              }}
-              block
-            >
-              This Month
-            </Button>
-          </Col>
-          <Col xs={12} sm={6} lg={3}>
-            <Button
-              size="small"
-              onClick={() => {
-                const start = moment().subtract(1, 'month').startOf('month');
-                const end = moment().subtract(1, 'month').endOf('month');
-                setDateRange(start, end);
-              }}
-              block
-            >
-              Last Month
-            </Button>
-          </Col>
-          <Col xs={12} sm={6} lg={3}>
-            <Button
-              size="small"
-              onClick={() => {
-                const start = moment().startOf('year');
-                const end = moment().endOf('year');
-                setDateRange(start, end);
-              }}
-              block
-            >
-              This Year
-            </Button>
-          </Col>
-          <Col xs={12} sm={6} lg={3}>
-            <Button
-              size="small"
-              onClick={() => {
-                const end = moment();
-                const start = moment().subtract(7, 'days');
-                setDateRange(start, end);
-              }}
-              block
-            >
-              Last 7 Days
-            </Button>
-          </Col>
-          <Col xs={12} sm={6} lg={3}>
-            <Button
-              size="small"
-              onClick={() => {
-                const end = moment();
-                const start = moment().subtract(30, 'days');
-                setDateRange(start, end);
-              }}
-              block
-            >
-              Last 30 Days
-            </Button>
-          </Col>
-          <Col xs={12} sm={6} lg={3}>
-            <Button
-              size="small"
-              onClick={() => {
-                const start = moment().subtract(1, 'year').startOf('year');
-                const end = moment().subtract(1, 'year').endOf('year');
-                setDateRange(start, end);
-              }}
-              block
-            >
-              Last Year
-            </Button>
-          </Col>
-        </Row>
+        <div style={{ marginTop: 16 }}>
+          <label className="filter-label" style={{ marginBottom: 8, display: 'block' }}>
+            Quick Date Ranges:
+          </label>
+          <Space wrap size={[8, 8]} style={{ width: '100%' }}>
+            <Button size="small" onClick={() => setQuickDateRange('today')}>Today</Button>
+            <Button size="small" onClick={() => setQuickDateRange('yesterday')}>Yesterday</Button>
+            <Button size="small" onClick={() => setQuickDateRange('thisWeek')}>This Week</Button>
+            <Button size="small" onClick={() => setQuickDateRange('lastWeek')}>Last Week</Button>
+            <Button size="small" onClick={() => setQuickDateRange('thisMonth')}>This Month</Button>
+            <Button size="small" onClick={() => setQuickDateRange('lastMonth')}>Last Month</Button>
+            <Button size="small" onClick={() => setQuickDateRange('thisYear')}>This Year</Button>
+            <Button size="small" onClick={() => setQuickDateRange('lastYear')}>Last Year</Button>
+            <Button size="small" onClick={() => setQuickDateRange('last7Days')}>Last 7 Days</Button>
+            <Button size="small" onClick={() => setQuickDateRange('last30Days')}>Last 30 Days</Button>
+          </Space>
+        </div>
+        
+        {/* Date Format Help */}
+        <div style={{ marginTop: 12, padding: 8, backgroundColor: '#f6ffed', border: '1px solid #b7eb8f', borderRadius: 4 }}>
+          <small style={{ color: '#52c41a' }}>
+            💡 <strong>Note:</strong> Enter dates in <code>DD/MM/YYYY</code> format (e.g., 25/12/2023)
+          </small>
+        </div>
       </Card>
 
       <Card className="data-table-card">
@@ -653,7 +611,7 @@ const MonthlyIncome = () => {
           <div className="table-title">
             <h3>Income Records</h3>
             <span className="record-count">
-              {data.length} records for {displayStartDate} to {displayEndDate}
+              {data.length} records for {startDate} to {endDate}
             </span>
           </div>
         </div>
