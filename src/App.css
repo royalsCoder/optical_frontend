@@ -1,3 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+/* Container for all pages */
+.app-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content area */
+.main-content {
+  flex: 1;
+  width: 100%;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Common Container Class */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%;
+}
+
+/* Card Styling */
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
+  overflow: hidden;
+}
+
+/* Input field styling */
+.ant-input-suffix {
+  color: #1890ff;
+  cursor: pointer;
+}
+
+/* Quick buttons styling */
+.ant-btn-sm {
+  font-size: 12px;
+  height: 24px;
+  padding: 0 8px;
+}
+
+/* Card styling */
+.summary-card .ant-statistic-title {
+  font-size: 14px;
+  color: #666;
+}
+
+.summary-card .ant-statistic-content {
+  font-size: 24px;
+}
+
+.card-footer {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
+  color: #999;
+  font-size: 12px;
+}
 #rearchinput {
   width: 30rem;
   padding: 0rem 1rem;
@@ -44,17 +129,9 @@ body {
   width: 6rem;
 }
 
-
-
-
-
-
 .lencerelative {
   position: relative;
 }
-
-
-
 
 * {
   margin: 0;
@@ -86,8 +163,6 @@ body {
   margin: auto;
 }
 
-
-
 /* view */
 
 .viewbox h3 {
@@ -104,15 +179,11 @@ body {
   height: 3rem;
   border-radius: 100px;
   overflow: hidden;
-
-
 }
 
 .viewimg img {
   width: 100%;
   height: 100%;
-
-
 }
 
 .viewimgbutton {
@@ -123,8 +194,6 @@ body {
 .viewbutton {
   margin-left: 7rem;
 }
-
-
 
 * {
   padding: 0;
@@ -157,7 +226,6 @@ body {
 hr {
   width: 200px;
 }
-
 
 .opt-form {
   -webkit-box-shadow: 0 28px 16px -26px rgba(0, 0, 0);
@@ -196,9 +264,6 @@ sup {
   font-weight: 600;
 }
 
-
-
-
 /* alluer data  */
 
 .userdata {
@@ -207,7 +272,6 @@ sup {
   margin: 2rem auto;
 }
 
-
 /* invice css */
 .invicecontainer {
   width: 100%;
@@ -215,7 +279,6 @@ sup {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .invicebox {
@@ -225,20 +288,17 @@ sup {
   margin: auto;
   position: relative;
   padding: 1rem;
-
 }
 
 .invicehead {
   display: flex;
   justify-content: space-between;
-
 }
 
 p {
   color: #666;
   font-size: 16px;
 }
-
 
 .inviceheadleft h4 {
   font-size: 1rem;
@@ -268,18 +328,12 @@ p {
   margin: 1rem 0rem;
 }
 
-
 /* local invice */
 
 .amountboxs {
   display: flex;
   justify-content: space-between;
 }
-
-
-
-
-
 
 .head {
   padding-top: 20px;
@@ -332,9 +386,8 @@ sup {
 }
 
 .dr-row {
-  background-color: #F6D7A7
+  background-color: #f6d7a7;
 }
-
 
 #frameinput input {
   width: 11rem;
@@ -343,8 +396,6 @@ sup {
   border: none;
   outline: none;
 }
-
-
 
 .container {
   width: 100%;
@@ -432,11 +483,7 @@ h2 {
   text-align: right;
 }
 
-
-
-
 /* invicenew */
-
 
 p {
   color: #666;
@@ -477,7 +524,6 @@ td {
   left: 60%;
   transform: translate(-50%, -50%) rotate(-15deg);
   pointer-events: none;
-  
 }
 
 .background-text h1 {
@@ -506,7 +552,7 @@ td {
   justify-content: space-between;
   align-items: center;
 }
-.both p{
+.both p {
   line-height: 0.5;
 }
 
@@ -539,12 +585,9 @@ td {
   text-align: center;
 }
 
-.row>*{
+.row > * {
   padding-left: 0;
 }
-
-
-
 
 /* send massage */
 
@@ -562,7 +605,7 @@ td {
   height: 100vh;
   overflow: hidden;
 
-  background-color: #CBEFFF;
+  background-color: #cbefff;
   display: none;
   justify-content: center;
   align-items: center;
@@ -581,9 +624,7 @@ td {
   position: fixed;
   top: 0;
   left: 0;
-
 }
-
 
 /* .whatsappbox {
   z-index: 12;
@@ -591,24 +632,22 @@ td {
   box-shadow: 1px 1px 12px 1px rgb(243, 243, 248);
 } */
 
-
-
 /* birthdaybox  */
 
-.birthdaybox{
+.birthdaybox {
   box-shadow: 1px 1px 12px 1px rgb(167 167 215);
   width: 47%;
   padding: 0.5rem 1rem;
   margin: 1rem;
 }
 
-.birthdaybox h3{
+.birthdaybox h3 {
   margin: 0;
 }
-.birthdaybox h6{
+.birthdaybox h6 {
   margin: 0;
 }
-.birthdayblock{
+.birthdayblock {
   display: flex;
 }
 .confirmation-dialog {
@@ -623,20 +662,16 @@ td {
   /* Add other styles as needed */
 }
 
-.marginbutton{
+.marginbutton {
   margin: 0rem 1rem;
 }
 
-
-
 /* datefilter */
 
-.dateFilter{
+.dateFilter {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-
 
 /* homeaddsection d-flex justify-content-between */
